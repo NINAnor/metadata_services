@@ -1,0 +1,14 @@
+[project]
+name = "pygeoapi-run"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pygeoapi==0.20.0",
+    "gunicorn",
+    "gevent",
+    "gdal==3.10",
+    "pyyaml",
+    "s3fs",
+]

@@ -1,0 +1,43 @@
+services:
+  pycsw:
+    profiles:
+      - pycsw
+    build:
+      context: pycsw
+    volumes:
+      - ./data:/home/pycsw/data/
+    ports:
+      - 5000:8000
+    environment:
+      - PYCSW_CONFIG=/home/pycsw/data/config.yml
+      - RECORDS_PARQUET_PATH=s3://miljodata-test/csw/*.parquet?s3_endpoint=s3-int-1.nina.no&s3_url_style=path
+    develop:
+      watch:
+        - path: pycsw/entrypoint.sh
+          action: rebuild
+        - path: pycsw/Dockerfile
+          action: rebuild
+        - path: pycsw/query.sql
+          action: rebuild
+        - path: data/config.yml
+          action: restart
+
+  pygeoapi:
+    profiles:
+      - pygeoapi
+    build:
+      context: pygeoapi
+    ports:
+      - 5001:80
+    volumes:
+      - ./pygeoapi/base.yml:/pygeoapi/base.yml
+    environment:
+      - PYGEOAPI_SERVER_URL='http://localhost:5001'
+    develop:
+      watch:
+        - path: pygeoapi/entrypoint.sh
+          action: rebuild
+        - path: pygeoapi/Dockerfile
+          action: rebuild
+        - path: pygeoapi/setup-conf.py
+          action: rebuild
