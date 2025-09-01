@@ -11,4 +11,5 @@ dependencies = [
     "gdal==3.10",
     "pyyaml",
     "s3fs",
+    "django-environ",
 ]
