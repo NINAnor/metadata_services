@@ -7,7 +7,7 @@ import environ
 
 env = environ.Env()
 
-S3_ENDPOINT_URL = env("ENDPOINT_URL")
+S3_ENDPOINT_URL = env("S3_ENDPOINT_URL")
 S3_BUCKET = env("S3_BUCKET")
 S3_PATH = env("S3_PATH", default="geoapi/*.json")
 
