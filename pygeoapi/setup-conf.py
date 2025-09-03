@@ -9,7 +9,7 @@ env = environ.Env()
 
 S3_ENDPOINT_URL = env("S3_ENDPOINT_URL")
 S3_BUCKET = env("S3_BUCKET")
-S3_PATH = env("S3_PATH", default="geoapi/*.json")
+S3_PATH = env("S3_PATH", default="/geoapi/*.json")
 
 base_config = yaml.load(pathlib.Path("base.yml").open(), yaml.SafeLoader)
 
