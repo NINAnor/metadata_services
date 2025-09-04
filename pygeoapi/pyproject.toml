@@ -12,4 +12,5 @@ dependencies = [
     "pyyaml",
     "s3fs",
     "django-environ",
+    "geopandas",
 ]
