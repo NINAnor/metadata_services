@@ -15,4 +15,6 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 COPY base.yml setup-conf.py .
 COPY entrypoint.sh /entrypoint.sh
 
+HEALTHCHECK --interval=1h CMD bash -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
+
 ENTRYPOINT [ "/entrypoint.sh" ]

@@ -1,5 +1,6 @@
 services:
   pycsw:
+    restart: unless-stopped
     profiles:
       - pycsw
     build:
@@ -23,6 +24,7 @@ services:
           action: restart
 
   pygeoapi:
+    restart: unless-stopped
     profiles:
       - pygeoapi
     build:
