@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-full-3.10.1 AS base
+FROM ghcr.io/osgeo/gdal:ubuntu-full-3.11.2 AS base
 RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
     apt-get update && apt-get install --no-install-recommends -yq \
