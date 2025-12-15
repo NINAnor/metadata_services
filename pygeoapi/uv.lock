@@ -1015,6 +1015,7 @@ dependencies = [
     { name = "pygeoapi" },
     { name = "pyproj" },
     { name = "pyyaml" },
+    { name = "rasterio" },
     { name = "s3fs" },
     { name = "shapely" },
 ]
@@ -1029,6 +1030,7 @@ requires-dist = [
     { name = "pygeoapi", specifier = "==0.22.0" },
     { name = "pyproj", specifier = ">=3.7.2" },
     { name = "pyyaml" },
+    { name = "rasterio" },
     { name = "s3fs" },
     { name = "shapely", specifier = ">=2.1.2" },
 ]
