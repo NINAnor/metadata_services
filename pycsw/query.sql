@@ -2,6 +2,8 @@ load sqlite;
 
 load httpfs;
 
+SET unsafe_disable_etag_checks = true;
+
 ATTACH IF NOT EXISTS 'data/records.db' AS sqlite_db (TYPE sqlite);
 
 delete from sqlite_db.records
