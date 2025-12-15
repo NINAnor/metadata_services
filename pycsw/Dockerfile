@@ -17,6 +17,6 @@ COPY config.yml data/config.yml
 COPY base.db query.sql .
 COPY entrypoint.sh /entrypoint.sh
 
-HEALTHCHECK --interval=1h CMD bash -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
+# HEALTHCHECK --interval=1h CMD bash -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
 ENTRYPOINT [ "/entrypoint.sh" ]
