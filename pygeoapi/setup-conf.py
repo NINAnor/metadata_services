@@ -24,6 +24,6 @@ for resource_file in resource_files:
         resources[resource["id"]] = resource
 
 
-base_config["resources"] = resources
+base_config["resources"] = (base_config["resources"] if base_config.get("resources") else {}) | resources
 
 yaml.dump(base_config, pathlib.Path("local.config.yml").open("w"), yaml.SafeDumper)
