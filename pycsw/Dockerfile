@@ -4,17 +4,12 @@ USER root
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends curl gettext
 
-ENV PATH="/root/.duckdb/cli/latest:$PATH"
-RUN <<EOF
-curl https://install.duckdb.org | sh
-duckdb ":memory:" "install sqlite;install httpfs;"
-mkdir data
-EOF
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+RUN mkdir data
 
 ENV PYCSW_CONFIG=/home/pycsw/data/config.yml
 
-COPY config.yml data/config.yml
-COPY base.db query.sql .
-COPY entrypoint.sh /entrypoint.sh
+COPY config.yml records.db data/
+COPY pull.py /usr/local/bin/pull_data
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "python3", "/usr/local/bin/entrypoint.py" ]

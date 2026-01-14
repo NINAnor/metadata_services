@@ -10,17 +10,20 @@ services:
       - 5000:8000
     environment:
       - PYCSW_CONFIG=/home/pycsw/data/config.yml
-      - CSW_RECORDS_PARQUET_PATH=${CSW_RECORDS_PARQUET_PATH}
+  pycsw-puller:
+    profiles:
+      - pycsw
+    build:
+      context: pycsw
+    volumes:
+      - ./data:/home/pycsw/data/
+    command: /usr/local/bin/pull_data ${CSW_RECORDS_PARQUET_PATH}
+    entrypoint: /bin/uv run --script
     develop:
       watch:
-        - path: pycsw/entrypoint.sh
-          action: rebuild
-        - path: pycsw/Dockerfile
-          action: rebuild
-        - path: pycsw/query.sql
-          action: rebuild
-        - path: data/config.yml
-          action: restart
+        - action: rebuild
+          path: pycsw
+
 
   pygeoapi:
     profiles:
