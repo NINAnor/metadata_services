@@ -1,3 +1,8 @@
+[dependency-groups]
+geo = [
+  "gdal==3.11.2"
+]
+
 [project]
 name = "pygeoapi-run"
 version = "0.1.0"
@@ -10,10 +15,12 @@ dependencies = [
     "pyproj>=3.7.2",
     "gunicorn>=23.0.0",
     "gevent>=25.9.1",
-    "gdal==3.11.2",
     "pyyaml",
     "s3fs",
     "rasterio",
     "django-environ",
     "geopandas>=1.1.1",
+    "structlog",
+    "typer",
+    "schedule>=1.2.2",
 ]

@@ -34,16 +34,39 @@ services:
       - 5001:80
     volumes:
       - ./pygeoapi/base.yml:/pygeoapi/base.yml
+      - pygeoapi-conf:/pygeoapi-conf
     environment:
       - PYGEOAPI_SERVER_URL='http://localhost:5001'
+      - PYGEOAPI_HOME=/pygeoapi-conf
       - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
       - S3_BUCKET=${S3_BUCKET}
       - S3_PATH=${S3_PATH}
     develop:
       watch:
-        - path: pygeoapi/entrypoint.sh
-          action: rebuild
         - path: pygeoapi/Dockerfile
           action: rebuild
+        - path: pygeoapi/pyproject.toml
+          action: rebuild
+        - path: pygeoapi/entrypoint.sh
+          action: rebuild
+  pygeoapi-puller:
+    profiles:
+      - pygeoapi
+    build:
+      context: pygeoapi
+    volumes:
+      - ./pygeoapi/base.yml:/pygeoapi/base.yml
+      - pygeoapi-conf:/pygeoapi-conf
+    environment:
+      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
+      - S3_BUCKET=${S3_BUCKET}
+      - S3_PATH=${S3_PATH}
+    entrypoint: /bin/uv run
+    command: setup-conf.py --output-folder /pygeoapi-conf
+    develop:
+      watch:
         - path: pygeoapi/setup-conf.py
           action: rebuild
+
+volumes:
+  pygeoapi-conf:
