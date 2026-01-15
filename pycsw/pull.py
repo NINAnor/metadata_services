@@ -1,15 +1,3 @@
-#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#   "duckdb==1.4.3",
-#   "schedule",
-#   "typer",
-#   "structlog",
-#   "s3fs",
-# ]
-# ///
-
 import time
 import logging
 import typer
@@ -18,6 +6,7 @@ import schedule
 import structlog
 import s3fs
 from urllib import parse
+import environ
 
 structlog.configure(
     processors=[
@@ -38,8 +27,13 @@ log = structlog.get_logger()
 
 etags: set[str] = set()
 
+env = environ.Env()
 
-def schedule_updates(csw_path, endpoint_url: str):
+CSW_PATH = env("CSW_RECORDS_PARQUET_PATH", default=None)
+ENDPOINT_URL = env("S3_ENDPOINT_URL", default=None)
+
+
+def schedule_updates(csw_path: str = CSW_PATH, endpoint_url: str = ENDPOINT_URL):
     parsed_csw_path = parse.urlparse(csw_path)
     log.info("install extensions")
     conn = duckdb.connect()

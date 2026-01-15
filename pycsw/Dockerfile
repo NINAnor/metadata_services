@@ -10,6 +10,7 @@ RUN mkdir data
 ENV PYCSW_CONFIG=/home/pycsw/data/config.yml
 
 COPY config.yml records.db data/
-COPY pull.py /usr/local/bin/pull_data
+COPY pull.py pyproject.toml uv.lock .
+RUN uv sync --frozen
 
 ENTRYPOINT [ "python3", "/usr/local/bin/entrypoint.py" ]

@@ -17,8 +17,11 @@ services:
       context: pycsw
     volumes:
       - ./data:/home/pycsw/data/
-    command: /usr/local/bin/pull_data ${CSW_RECORDS_PARQUET_PATH}
-    entrypoint: /bin/uv run --script
+    command: pull.py
+    entrypoint: /bin/uv run
+    environment:
+      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
+      - CSW_RECORDS_PARQUET_PATH=${CSW_RECORDS_PARQUET_PATH}
     develop:
       watch:
         - action: rebuild
