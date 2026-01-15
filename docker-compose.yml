@@ -10,23 +10,12 @@ services:
       - 5000:8000
     environment:
       - PYCSW_CONFIG=/home/pycsw/data/config.yml
-  pycsw-puller:
-    profiles:
-      - pycsw
-    build:
-      context: pycsw
-    volumes:
-      - ./data:/home/pycsw/data/
-    command: pull.py
-    entrypoint: /bin/uv run
-    environment:
-      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
-      - CSW_RECORDS_PARQUET_PATH=${CSW_RECORDS_PARQUET_PATH}
     develop:
       watch:
         - action: rebuild
           path: pycsw
-
+        - action: restart
+          path: data/config.yml
 
   pygeoapi:
     profiles:
