@@ -1,4 +1,4 @@
-FROM geopython/pycsw:3.0.0-beta1
+FROM geopython/pycsw:3.0.0-beta2
 
 USER root
 RUN apt-get update --yes && \
@@ -13,4 +13,4 @@ COPY config.yml records.db data/
 COPY pull.py pyproject.toml uv.lock .
 RUN uv sync --frozen
 
-ENTRYPOINT [ "python3", "/usr/local/bin/entrypoint.py" ]
+ENTRYPOINT [ "/venv/bin/python3", "/usr/local/bin/entrypoint.py" ]
