@@ -6,10 +6,10 @@ RUN apt-get update --yes && \
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN mkdir data
-
 ENV PYCSW_CONFIG=/home/pycsw/data/config.yml
 
-COPY config.yml records.db data/
+COPY config.yml data/
+RUN cd data && /venv/bin/pycsw-admin.py setup-repository --config $PYCSW_CONFIG
 COPY pull.py pyproject.toml uv.lock .
 RUN uv sync --frozen
 
