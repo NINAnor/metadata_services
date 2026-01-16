@@ -2,7 +2,7 @@
 
 set -e
 
-export PYGEOAPI_HOME=${PYGEOAPI_HOME:="/pygeoapi"}
+export PYGEOAPI_HOME=${PYGEOAPI_HOME:="/pygeoapi/config"}
 export PYGEOAPI_CONFIG="${PYGEOAPI_HOME}/local.config.yml"
 export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.yml"
 
@@ -14,18 +14,7 @@ WSGI_WORKERS=${WSGI_WORKERS:=4}
 WSGI_WORKER_TIMEOUT=${WSGI_WORKER_TIMEOUT:=6000}
 WSGI_WORKER_CLASS=${WSGI_WORKER_CLASS:=gevent}
 
-until [ -e "$PYGEOAPI_CONFIG" ]; do
-  echo "Waiting for $PYGEOAPI_CONFIG to exist..."
-  sleep 2 # Wait for 2 seconds before checking again
-done
-
-until [ -e "$PYGEOAPI_OPENAPI" ]; do
-  echo "Waiting for $PYGEOAPI_OPENAPI to exist..."
-  sleep 2 # Wait for 2 seconds before checking again
-done
-
-# cat $PYGEOAPI_OPENAPI
-# cat $PYGEOAPI_CONFIG
+uv run pygeoapi openapi generate ${PYGEOAPI_CONFIG} --output-file ${PYGEOAPI_OPENAPI}
 
 echo "Starting gunicorn name=${CONTAINER_NAME} on ${CONTAINER_HOST}:${CONTAINER_PORT} with ${WSGI_WORKERS} workers"
 watchexec -rw "$PYGEOAPI_CONFIG" --fs-events modify --stop-timeout 5s -- exec "uv run gunicorn --workers ${WSGI_WORKERS} \

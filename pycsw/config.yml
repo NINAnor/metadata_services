@@ -21,9 +21,8 @@ profiles:
   - apiso
 
 manager:
-  transactions: false
-  allowed_ips:
-    - 127.0.0.1
+  transactions: true
+  allowed_ips: [$ALLOWED_IPS]
 
 metadata:
   identification:

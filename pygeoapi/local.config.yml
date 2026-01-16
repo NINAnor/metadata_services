@@ -9,7 +9,6 @@ server:
   languages:
     # First language is the default language
     - en-US
-    - fr-CA
   cors: true
   pretty_print: true
   limits:
@@ -26,7 +25,7 @@ server:
   #        connection: /tmp/pygeoapi-process-manager.db
   #        output_dir: /tmp/
   # ogc_schemas_location: /opt/schemas.opengis.net
-  admin: false # enable admin api
+  admin: true # enable admin api
 
 logging:
   level: ERROR
@@ -36,18 +35,12 @@ metadata:
   identification:
     title:
       en: pygeoapi default instance
-      fr: instance par défaut de pygeoapi
     description:
       en: pygeoapi provides an API to geospatial data
-      fr: pygeoapi fournit une API aux données géospatiales
     keywords:
       en:
         - geospatial
         - data
-        - api
-      fr:
-        - géospatiale
-        - données
         - api
     keywords_type: theme
     terms_of_service: https://creativecommons.org/licenses/by/4.0/
@@ -73,3 +66,10 @@ metadata:
     hours: Mo-Fr 08:00-17:00
     instructions: During hours of service. Off on weekends.
     role: pointOfContact
+
+resources:
+  hello-world:
+    type: process
+    visibility: hidden
+    processor:
+        name: HelloWorld

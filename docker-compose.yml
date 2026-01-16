@@ -1,38 +1,30 @@
 services:
   pycsw:
-    profiles:
-      - pycsw
     build:
       context: pycsw
     volumes:
-      - ./data:/home/pycsw/data/
+      - ./data/pycsw:/home/pycsw/data/
     ports:
       - 5000:8000
     environment:
       - PYCSW_CONFIG=/home/pycsw/data/config.yml
+      - ALLOWED_IPS=${ALLOWED_IPS}
     develop:
       watch:
         - action: rebuild
           path: pycsw
         - action: restart
-          path: data/config.yml
+          path: data/pycsw/config.yml
 
   pygeoapi:
-    profiles:
-      - pygeoapi
     build:
       context: pygeoapi
     ports:
       - 5001:80
     volumes:
-      - ./pygeoapi/base.yml:/pygeoapi/base.yml
-      - pygeoapi-conf:/pygeoapi-conf
+      - ./data/pygeoapi/:/pygeoapi/config
     environment:
       - PYGEOAPI_SERVER_URL='http://localhost:5001'
-      - PYGEOAPI_HOME=/pygeoapi-conf
-      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
-      - S3_BUCKET=${S3_BUCKET}
-      - S3_PATH=${S3_PATH}
     develop:
       watch:
         - path: pygeoapi/Dockerfile
@@ -41,24 +33,3 @@ services:
           action: rebuild
         - path: pygeoapi/entrypoint.sh
           action: rebuild
-  pygeoapi-puller:
-    profiles:
-      - pygeoapi
-    build:
-      context: pygeoapi
-    volumes:
-      - ./pygeoapi/base.yml:/pygeoapi/base.yml
-      - pygeoapi-conf:/pygeoapi-conf
-    environment:
-      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
-      - S3_BUCKET=${S3_BUCKET}
-      - S3_PATH=${S3_PATH}
-    entrypoint: /bin/uv run
-    command: setup-conf.py --output-folder /pygeoapi-conf
-    develop:
-      watch:
-        - path: pygeoapi/setup-conf.py
-          action: rebuild
-
-volumes:
-  pygeoapi-conf:

@@ -23,4 +23,7 @@ dependencies = [
     "structlog",
     "typer",
     "schedule>=1.2.2",
+    "uvicorn>=0.40.0",
+    "starlette>=0.51.0",
+    "jsonpatch>=1.33",
 ]

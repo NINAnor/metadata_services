@@ -20,7 +20,8 @@ COPY pyproject.toml uv.lock .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --all-groups
 
-COPY base.yml setup-conf.py .
+RUN mkdir -p config
+COPY local.config.yml config/
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
