@@ -16,6 +16,23 @@ services:
         - action: restart
           path: data/pycsw/config.yml
 
+  pycsw-harvester:
+    build:
+      context: pycsw
+    volumes:
+      - ./data/pycsw:/home/pycsw/data/
+    entrypoint: ""
+    command: /usr/local/bin/start-cron.sh
+    environment:
+      - PYCSW_CONFIG=/home/pycsw/data/config.yml
+      - ALLOWED_IPS=${ALLOWED_IPS}
+    develop:
+      watch:
+        - action: rebuild
+          path: pycsw
+        - action: restart
+          path: data/pycsw/config.yml
+
   pygeoapi:
     build:
       context: pygeoapi
