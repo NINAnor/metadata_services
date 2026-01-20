@@ -22,7 +22,7 @@ profiles:
 
 manager:
   transactions: true
-  allowed_ips: [$ALLOWED_IPS]
+  allowed_ips: $ALLOWED_IPS
 
 metadata:
   identification:
