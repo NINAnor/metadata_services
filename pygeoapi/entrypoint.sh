@@ -17,10 +17,10 @@ WSGI_WORKER_CLASS=${WSGI_WORKER_CLASS:=gevent}
 uv run pygeoapi openapi generate ${PYGEOAPI_CONFIG} --output-file ${PYGEOAPI_OPENAPI}
 
 echo "Starting gunicorn name=${CONTAINER_NAME} on ${CONTAINER_HOST}:${CONTAINER_PORT} with ${WSGI_WORKERS} workers"
-watchexec -rw "$PYGEOAPI_CONFIG" --fs-events modify --stop-timeout 5s -- exec "uv run gunicorn --workers ${WSGI_WORKERS} \
+uv run gunicorn --workers ${WSGI_WORKERS} \
     --worker-class=${WSGI_WORKER_CLASS} \
     --timeout ${WSGI_WORKER_TIMEOUT} \
     --name=${CONTAINER_NAME} \
     --bind ${CONTAINER_HOST}:${CONTAINER_PORT} \
     ${@} \
-    ${WSGI_APP}"
+    ${WSGI_APP}
