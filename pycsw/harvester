@@ -1,5 +1,1 @@
-# Set environment variables for cron
-PATH=/usr/local/bin:/usr/bin:/bin
-SHELL=/bin/bash
-
-0 0 * * * * /venv/bin/pycsw-admin.py refresh-harvested-records --config /home/pycsw/data/config.yml >> /home/pycsw/data/cron.log 2>&1
+0 0 * * * /venv/bin/pycsw-admin.py refresh-harvested-records --config /home/pycsw/data/config.yml >> /home/pycsw/data/cron.log 2>&1

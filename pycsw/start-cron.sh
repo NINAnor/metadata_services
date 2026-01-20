@@ -1,8 +1,9 @@
 #!/bin/bash
-set -e
 
 touch /home/pycsw/data/cron.log
-cd /home/pycsw/data && /venv/bin/pycsw-admin.py setup-repository --config $PYCSW_CONFIG
+/venv/bin/pycsw-admin.py setup-repository --config $PYCSW_CONFIG
+
+set -e
 
 echo "Installing cron job..."
 crontab /etc/cron.d/harvester
