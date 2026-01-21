@@ -22,5 +22,7 @@ uv run gunicorn --workers ${WSGI_WORKERS} \
     --timeout ${WSGI_WORKER_TIMEOUT} \
     --name=${CONTAINER_NAME} \
     --bind ${CONTAINER_HOST}:${CONTAINER_PORT} \
+    --reload \
+    --reload-extra-file ${PYGEOAPI_CONFIG} \
     ${@} \
     ${WSGI_APP}
