@@ -453,9 +453,9 @@ wheels = [
 
 [[package]]
 name = "gdal"
-version = "3.11.2"
+version = "3.13.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d8/bd/78a98628250f44a3d0fac4850045af18980daa854c97297075f7f91933a7/gdal-3.11.2.tar.gz", hash = "sha256:ee3acb0ca11c22ca71f8313effa8e5789acf677297ef8343096c4f35da54dfd4", size = 878180, upload-time = "2025-07-11T08:56:13.327Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/92/55/0ae08a59293443bbbb8b692d1f4b6d9ca54562c359a48d0426684ac9ea06/gdal-3.13.1.tar.gz", hash = "sha256:94bb64d729ce73ceb75a314a15cba92696cdd854d99b6bf6b88a7b551227db74", size = 940649, upload-time = "2026-06-05T10:50:14.929Z" }
 
 [[package]]
 name = "geopandas"
@@ -1117,7 +1117,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-geo = [{ name = "gdal", specifier = "==3.11.2" }]
+geo = [{ name = "gdal", specifier = "==3.13.1" }]
 
 [[package]]
 name = "pygeofilter"

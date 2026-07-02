@@ -1,6 +1,6 @@
 [dependency-groups]
 geo = [
-  "gdal==3.11.2"
+  "gdal==3.13.1"
 ]
 
 [project]
