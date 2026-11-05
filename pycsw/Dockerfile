@@ -1,4 +1,4 @@
-FROM geopython/pycsw:3.0.0-beta2
+FROM geopython/pycsw:3.0.0-beta4
 
 USER root
 
