@@ -14,10 +14,10 @@ WSGI_WORKERS=${WSGI_WORKERS:=4}
 WSGI_WORKER_TIMEOUT=${WSGI_WORKER_TIMEOUT:=6000}
 WSGI_WORKER_CLASS=${WSGI_WORKER_CLASS:=gevent}
 
-uv run pygeoapi openapi generate ${PYGEOAPI_CONFIG} --output-file ${PYGEOAPI_OPENAPI}
+pixi run --frozen pygeoapi openapi generate ${PYGEOAPI_CONFIG} --output-file ${PYGEOAPI_OPENAPI}
 
 echo "Starting gunicorn name=${CONTAINER_NAME} on ${CONTAINER_HOST}:${CONTAINER_PORT} with ${WSGI_WORKERS} workers"
-uv run gunicorn --workers ${WSGI_WORKERS} \
+pixi run --frozen gunicorn --workers ${WSGI_WORKERS} \
     --worker-class=${WSGI_WORKER_CLASS} \
     --timeout ${WSGI_WORKER_TIMEOUT} \
     --name=${CONTAINER_NAME} \

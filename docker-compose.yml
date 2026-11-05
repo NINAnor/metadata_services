@@ -47,5 +47,7 @@ services:
           action: rebuild
         - path: pygeoapi/pyproject.toml
           action: rebuild
+        - path: pygeoapi/pixi.lock
+          action: rebuild
         - path: pygeoapi/entrypoint.sh
           action: rebuild
