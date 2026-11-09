@@ -12,6 +12,11 @@ Different services can then write different parquet files to expose such metadat
 A metadata row should follow the [Metadata model reference](https://docs.pycsw.org/en/latest/metadata-model-reference.html#metadata-model-reference) of `pycsw`.
 The `XML` property can be generated with [PyGeoMeta](https://github.com/geopython/pygeometa).
 
+CSW-T transactions are enabled by `manager.transactions` in `pycsw/config.yml`.
+The configured `manager.allowed_ips` must include the IP addresses of transaction
+clients and the harvester container. The scheduled harvester refreshes registered
+non-local sources through `http://pycsw:8000/csw`.
+
 ### PyGeoAPI
 PyGeoAPI entrypoint reads a series of JSON files containing arrays of pygeoapi resources (https://docs.pygeoapi.io/en/latest/data-publishing/ogcapi-features.html).
 All the resources are joined together with the base configuration.

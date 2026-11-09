@@ -1,1 +1,1 @@
-0 0 * * * /venv/bin/pycsw-admin.py refresh-harvested-records --config /home/pycsw/data/config.yml >> /home/pycsw/data/cron.log 2>&1
+0 0 * * * /venv/bin/pycsw-admin.py refresh-harvested-records --config /home/pycsw/data/config.yml --url http://pycsw:8000/csw >> /home/pycsw/data/cron.log 2>&1
