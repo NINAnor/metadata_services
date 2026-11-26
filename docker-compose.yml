@@ -24,6 +24,7 @@ services:
     entrypoint: /usr/local/bin/start-cron.sh
     environment:
       - PYCSW_CONFIG=/home/pycsw/data/config.yml
+      - PYCSW_HARVESTERS=/home/pycsw/data/config.yml|http://pycsw:8000/csw
       - ALLOWED_IPS=${ALLOWED_IPS}
     develop:
       watch:

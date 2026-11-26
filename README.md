@@ -14,8 +14,10 @@ The `XML` property can be generated with [PyGeoMeta](https://github.com/geopytho
 
 CSW-T transactions are enabled by `manager.transactions` in `pycsw/config.yml`.
 The configured `manager.allowed_ips` must include the IP addresses of transaction
-clients and the harvester container. The scheduled harvester refreshes registered
-non-local sources through `http://pycsw:8000/csw`.
+clients and the harvester container. The scheduled harvester requires
+`PYCSW_HARVESTERS`, even for a single catalogue. Set it to one or more
+semicolon-separated `CONFIG|URL` pairs; each pair gets its own daily refresh,
+staggered five minutes apart. Startup fails if the variable is missing or empty.
 
 ### PyGeoAPI
 PyGeoAPI entrypoint reads a series of JSON files containing arrays of pygeoapi resources (https://docs.pygeoapi.io/en/latest/data-publishing/ogcapi-features.html).
